@@ -1,0 +1,7 @@
+{
+	"name": "@chr33s/ai",
+	"type": "module",
+	"scripts": {
+		"tsx": "run () { node --experimental-strip-types --no-warnings=ExperimentalWarning $(npm root)/.bin/${@}; }; run"
+	}
+}
