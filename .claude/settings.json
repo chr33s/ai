@@ -21,6 +21,14 @@
 				"--config=.playwright.config.json"
 			],
 			"command": "npx"
+		},
+		"shopify-dev-mcp": {
+			"args": ["-y", "@shopify/dev-mcp@latest"],
+			"command": "npx",
+			"env": {
+				"OPT_OUT_INSTRUMENTATION": "true",
+				"POLARIS_UNIFIED": "true"
+			}
 		}
 	},
 	"preferredNotifChannel": "terminal_bell",
