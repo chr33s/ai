@@ -39,11 +39,14 @@
 		"ghcr.io/devcontainers/features/git:1": {},
 		"ghcr.io/devcontainers/features/github-cli:1": {},
 		"ghcr.io/devcontainers-extra/features/asdf-package:1": {},
-		"ghcr.io/devcontainers-extra/features/cloudflared:1": {},
-		"ghcr.io/devcontainers-extra/features/tailscale:1": {},
-		"ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {}
+		"ghcr.io/devcontainers-extra/features/tailscale:1": {}
 	},
 	"forwardPorts": [8080],
+	"mounts": [
+		"source=${localEnv:HOME}/Developer/app,target=/workspaces/ai/app,type=bind,consistency=cached"
+	],
+	"postCreateCommand": "npm install",
+	"postStartCommand": "npx claude",
 	"remoteEnv": {
 		"CLAUDE_CONFIG_DIR": ".claude",
 		"NODE_OPTIONS": "--max-old-space-size=4096"

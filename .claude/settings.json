@@ -1,36 +1,6 @@
 {
 	"includeCoAuthoredBy": false,
-	"mcpServers": {
-		"cloudflare-observability": {
-			"args": [
-				"mcp-remote@latest",
-				"https://observability.mcp.cloudflare.com/sse"
-			],
-			"command": "npx"
-		},
-		"cloudflare-bindings": {
-			"args": [
-				"mcp-remote@latest",
-				"https://bindings.mcp.cloudflare.com/sse"
-			],
-			"command": "npx"
-		},
-		"playwright": {
-			"args": [
-				"@playwright/mcp@latest",
-				"--config=.playwright.config.json"
-			],
-			"command": "npx"
-		},
-		"shopify-dev-mcp": {
-			"args": ["-y", "@shopify/dev-mcp@latest"],
-			"command": "npx",
-			"env": {
-				"OPT_OUT_INSTRUMENTATION": "true",
-				"POLARIS_UNIFIED": "true"
-			}
-		}
-	},
+	"mcpServers": {},
 	"preferredNotifChannel": "terminal_bell",
 	"theme": "light"
 }
