@@ -48,9 +48,19 @@
 	"postAttachCommand": "npm update",
 	"postCreateCommand": "npm install",
 	"remoteEnv": {
-		"CLAUDE_CONFIG_DIR": ".claude",
+		"ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}",
+		"CLAUDE_CONFIG_DIR": "${containerWorkspaceFolder}/.claude",
+		"GITHUB_COPILOT_TOKEN": "${localEnv:GITHUB_COPILOT_TOKEN}",
+		"GOOGLE_API_KEY": "${localEnv:GOOGLE_API_KEY}",
+		"GROQ_API_KEY": "${localEnv:GROQ_API_KEY}",
 		"NODE_OPTIONS": "--max-old-space-size=4096"
 	},
 	"remoteUser": "node",
-	"runArgs": ["--env-file", ".devcontainer/devcontainer.env"]
+	"runArgs": ["--env-file", ".devcontainer/devcontainer.env"],
+	"secrets": {
+		"ANTHROPIC_API_KEY": {},
+		"GITHUB_COPILOT_TOKEN": {},
+		"GOOGLE_API_KEY": {},
+		"GROQ_API_KEY": {},
+	}
 }
