@@ -45,8 +45,8 @@
 	"mounts": [
 		"source=${localEnv:HOME}/Developer/app,target=/workspaces/ai/app,type=bind,consistency=cached"
 	],
+	"postAttachCommand": "npm update",
 	"postCreateCommand": "npm install",
-	"postStartCommand": "npx claude",
 	"remoteEnv": {
 		"CLAUDE_CONFIG_DIR": ".claude",
 		"NODE_OPTIONS": "--max-old-space-size=4096"
