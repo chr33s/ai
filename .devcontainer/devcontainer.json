@@ -4,6 +4,7 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
+				"anthropic.claude-code",
 				"bierner.comment-tagged-templates",
 				"dbaeumer.vscode-eslint",
 				"EditorConfig.EditorConfig",

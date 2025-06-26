@@ -2,12 +2,13 @@
 	"name": "@chr33s/ai",
 	"type": "module",
 	"scripts": {
-		"install:claude": "code --install-extension =./node_modules/@anthropic-ai/claude-code/vendor/claude-code.vsix",
 		"install:goose": "curl -fsSL https://github.com/block/goose/releases/download/stable/download_cli.sh | bash",
+		"postinstall": "npm run install:goose",
 		"tsx": "run () { node --experimental-strip-types --no-warnings=ExperimentalWarning $(npm root)/.bin/${@}; }; run"
 	},
 	"dependencies": {
 		"@anthropic-ai/claude-code": "latest",
+		"@google/gemini-cli": "latest",
 		"opencode-ai": "latest"
 	}
 }
