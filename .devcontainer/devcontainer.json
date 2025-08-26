@@ -6,33 +6,40 @@
 			"extensions": [
 				"anthropic.claude-code",
 				"bierner.comment-tagged-templates",
-				"dbaeumer.vscode-eslint",
 				"EditorConfig.EditorConfig",
+				"esbenp.prettier-vscode",
 				"GitHub.copilot",
 				"GitHub.copilot-chat",
 				"google.geminicodeassist",
+				"oxc.oxc-vscode",
+				"RooVeterinaryInc.roo-cline",
 				"saoudrizwan.claude-dev",
 				"Tailscale.vscode-tailscale"
 			],
 			"settings": {
 				"editor.codeActionsOnSave": {
-					"source.fixAll.eslint": "explicit"
+					"source.fixAll": "explicit"
 				},
-				"editor.defaultFormatter": "dbaeumer.vscode-eslint",
-				"eslint.enable": true,
-				"eslint.format.enable": true,
+				"editor.defaultFormatter": "oxc.oxc-vscode",
 				"editor.formatOnSave": true,
 				"files.associations": {
 					".*.vars": "properties",
 					".env*": "properties"
 				},
+				"files.insertFinalNewline": true,
+				"github.copilot.chat.codeGeneration.useInstructionFiles": true,
+				"github.copilot.chat.codesearch.enabled": true,
 				"github.copilot.enable": {
 					"*": true
 				},
 				"geminicodeassist.enable": true,
 				"geminicodeassist.enableTelemetry": false,
+				"oxc.enable": true,
 				"prettier.enable": true,
-				"terminal.integrated.defaultProfile.linux": "zsh"
+				"terminal.integrated.suggest.enabled": true,
+				"terminal.integrated.defaultProfile.linux": "zsh",
+				"typescript.enablePromptUseWorkspaceTsdk": true,
+				"typescript.tsdk": "node_modules/typescript/lib"
 			}
 		}
 	},
@@ -44,7 +51,7 @@
 	},
 	"forwardPorts": [8080],
 	"mounts": [
-		"source=${localEnv:HOME}/Developer/app,target=/workspaces/ai/app,type=bind,consistency=cached"
+		"source=${localEnv:HOME}/Developer/stocu/main,target=/workspaces/ai/stocu,type=bind,consistency=cached"
 	],
 	"postAttachCommand": "npm update",
 	"postCreateCommand": "npm install",
@@ -63,6 +70,6 @@
 		"ANTHROPIC_API_KEY": {},
 		"GITHUB_COPILOT_TOKEN": {},
 		"GOOGLE_API_KEY": {},
-		"GROQ_API_KEY": {},
+		"GROQ_API_KEY": {}
 	}
 }
