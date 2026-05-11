@@ -1,22 +1,16 @@
 {
 	"name": "@chr33s/ai",
-	"image": "mcr.microsoft.com/devcontainers/typescript-node:22",
+	"image": "mcr.microsoft.com/devcontainers/typescript-node:24",
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"anthropic.claude-code",
 				"bierner.comment-tagged-templates",
 				"EditorConfig.EditorConfig",
-				"esbenp.prettier-vscode",
-				"GitHub.copilot",
-				"GitHub.copilot-chat",
-				"google.geminicodeassist",
-				"oxc.oxc-vscode",
-				"RooVeterinaryInc.roo-cline",
-				"saoudrizwan.claude-dev",
-				"Tailscale.vscode-tailscale"
+				"Tailscale.vscode-tailscale",
+				"oxc.oxc-vscode"
 			],
 			"settings": {
+				"dev.containers.experimentalAppleContainerSupport": true,
 				"editor.codeActionsOnSave": {
 					"source.fixAll": "explicit"
 				},
@@ -27,49 +21,35 @@
 					".env*": "properties"
 				},
 				"files.insertFinalNewline": true,
-				"github.copilot.chat.codeGeneration.useInstructionFiles": true,
-				"github.copilot.chat.codesearch.enabled": true,
-				"github.copilot.enable": {
-					"*": true
-				},
-				"geminicodeassist.enable": true,
-				"geminicodeassist.enableTelemetry": false,
+				"js/ts.tsdk.path": "node_modules/typescript/lib",
+				"js/ts.tsdk.promptToUseWorkspaceVersion": true,
 				"oxc.enable": true,
 				"prettier.enable": true,
 				"terminal.integrated.suggest.enabled": true,
-				"terminal.integrated.defaultProfile.linux": "zsh",
-				"typescript.enablePromptUseWorkspaceTsdk": true,
-				"typescript.tsdk": "node_modules/typescript/lib"
+				"terminal.integrated.defaultProfile.linux": "zsh"
 			}
 		}
 	},
 	"features": {
 		"ghcr.io/devcontainers/features/git:1": {},
 		"ghcr.io/devcontainers/features/github-cli:1": {},
-		"ghcr.io/devcontainers-extra/features/asdf-package:1": {},
 		"ghcr.io/devcontainers-extra/features/tailscale:1": {}
 	},
-	"forwardPorts": [8080],
+	"forwardPorts": [
+		8080
+	],
 	"mounts": [
-		"source=${localEnv:HOME}/Developer/stocu/main,target=/workspaces/ai/stocu,type=bind,consistency=cached"
+		"source=${localEnv:HOME}/Developer,target=/workspace/developer,type=bind,consistency=cached"
 	],
 	"postAttachCommand": "npm update",
 	"postCreateCommand": "npm install",
 	"remoteEnv": {
-		"ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}",
-		"CLAUDE_CONFIG_DIR": "${containerWorkspaceFolder}/.claude",
-		"GITHUB_COPILOT_TOKEN": "${localEnv:GITHUB_COPILOT_TOKEN}",
-		"GEMINI_API_KEY": "${localEnv:GOOGLE_API_KEY}",
-		"GOOGLE_API_KEY": "${localEnv:GOOGLE_API_KEY}",
-		"GROQ_API_KEY": "${localEnv:GROQ_API_KEY}",
 		"NODE_OPTIONS": "--max-old-space-size=4096"
 	},
 	"remoteUser": "node",
-	"runArgs": ["--env-file", ".devcontainer/devcontainer.env"],
-	"secrets": {
-		"ANTHROPIC_API_KEY": {},
-		"GITHUB_COPILOT_TOKEN": {},
-		"GOOGLE_API_KEY": {},
-		"GROQ_API_KEY": {}
-	}
+	"runArgs": [
+		"--env-file",
+		".devcontainer/devcontainer.env"
+	],
+	"secrets": {}
 }

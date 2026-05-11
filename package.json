@@ -1,16 +1,4 @@
 {
 	"name": "@chr33s/ai",
-	"type": "module",
-	"scripts": {
-		"install:goose": "curl -fsSL https://github.com/block/goose/releases/download/stable/download_cli.sh | bash",
-		"postinstall": "npm run install:goose",
-		"tsx": "run () { node --no-warnings=ExperimentalWarning $(npm root)/.bin/${@}; }; run"
-	},
-	"dependencies": {
-		"@anthropic-ai/claude-code": "latest",
-		"@github/copilot": "latest",
-		"@google/gemini-cli": "latest",
-		"@openai/codex": "latest",
-		"opencode-ai": "latest"
-	}
+	"type": "module"
 }
