@@ -26,6 +26,45 @@ EOF
 top -o mem # Activity monitor (gpu tab)
 ```
 
+### Sandbox
+
+`sandbox-exec` is deprecated on modern macOS, so this repo treats it as defense in depth rather than a primary isolation boundary. The real boundary should still be the dedicated `mlx` account and, when practical, the container workflow below.
+
+This repo includes two seatbelt profiles:
+
+- `sandbox/runtime.sb`: offline, read-only access to code and models, write access only to data, cache, and temp directories.
+- `sandbox/bootstrap.sb`: broader profile for one-time model or package downloads.
+
+The launcher script runs an explicit executable under the `mlx` account with the shared paths from this README:
+
+```sh
+chmod +x scripts/sandbox.sh
+
+# Offline runtime profile.
+scripts/sandbox.sh runtime -- /opt/homebrew/bin/node ./server.js
+
+# One-time bootstrap profile for downloads.
+scripts/sandbox.sh bootstrap -- /Users/Shared/mlx/.venv/bin/python -m mlx_lm.server
+```
+
+You can override the shared paths if you need a different layout:
+
+```sh
+APP_ROOT="$PWD" \
+DATA_ROOT=/Users/Shared/mlx/data \
+MODEL_ROOT=/Users/Shared/mlx/models \
+CACHE_ROOT=/Users/Shared/mlx/.cache/hf \
+TMP_ROOT=/private/tmp/chr33s-ai \
+scripts/sandbox.sh runtime -- /opt/homebrew/bin/node ./server.js
+```
+
+Operational rules:
+
+- Keep `MODEL_ROOT` read-only during normal runtime.
+- Download or update models with the `bootstrap` profile, then switch back to `runtime`.
+- Do not grant access to your normal home directory, SSH keys, or Keychain-backed material.
+- Wrap only the inference or app process, not your editor or shell session.
+
 ```py
 import mlx.core as mx
 

@@ -1,0 +1,43 @@
+(version 1)
+
+(deny default)
+(import "system.sb")
+
+(define app-root (param "APP_ROOT"))
+(define data-root (param "DATA_ROOT"))
+(define model-root (param "MODEL_ROOT"))
+(define cache-root (param "CACHE_ROOT"))
+(define tmp-root (param "TMP_ROOT"))
+
+(allow process-exec (literal (param "EXECUTABLE")))
+
+(allow file-read*
+  (subpath app-root)
+  (subpath model-root)
+  (subpath "/System")
+  (subpath "/Library")
+  (subpath "/usr/lib")
+  (subpath "/opt/homebrew")
+  (subpath "/private/var/db/dyld")
+  (subpath "/dev"))
+
+(allow file-write*
+  (subpath data-root)
+  (subpath model-root)
+  (subpath cache-root)
+  (subpath tmp-root)
+  (literal "/dev/null"))
+
+(allow file-read-metadata
+  (subpath data-root)
+  (subpath model-root)
+  (subpath cache-root)
+  (subpath tmp-root)
+  (subpath "/System")
+  (subpath "/Library")
+  (subpath "/usr")
+  (subpath "/opt/homebrew"))
+
+; Bootstrap profile permits outbound fetches for model and package downloads.
+(allow network-outbound)
+(deny network-inbound)
