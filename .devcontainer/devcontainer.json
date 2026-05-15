@@ -10,7 +10,6 @@
 				"oxc.oxc-vscode"
 			],
 			"settings": {
-				"dev.containers.experimentalAppleContainerSupport": true,
 				"editor.codeActionsOnSave": {
 					"source.fixAll": "explicit"
 				},
@@ -32,8 +31,7 @@
 	},
 	"features": {
 		"ghcr.io/devcontainers/features/git:1": {},
-		"ghcr.io/devcontainers/features/github-cli:1": {},
-		"ghcr.io/devcontainers-extra/features/tailscale:1": {}
+		"ghcr.io/devcontainers/features/github-cli:1": {}
 	},
 	"forwardPorts": [
 		8080

@@ -30,14 +30,5 @@
   (subpath tmp-root)
   (literal "/dev/null"))
 
-(allow file-read-metadata
-  (subpath data-root)
-  (subpath cache-root)
-  (subpath tmp-root)
-  (subpath "/System")
-  (subpath "/Library")
-  (subpath "/usr")
-  (subpath "/opt/homebrew"))
-
 ; Runtime profile stays offline.
 (deny network*)

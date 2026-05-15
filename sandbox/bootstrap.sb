@@ -9,7 +9,9 @@
 (define cache-root (param "CACHE_ROOT"))
 (define tmp-root (param "TMP_ROOT"))
 
-(allow process-exec (literal (param "EXECUTABLE")))
+; Bootstrap may shell out (pip, git, tar, compilers) while installing packages.
+(allow process-exec*)
+(allow process-fork)
 
 (allow file-read*
   (subpath app-root)
@@ -27,16 +29,6 @@
   (subpath cache-root)
   (subpath tmp-root)
   (literal "/dev/null"))
-
-(allow file-read-metadata
-  (subpath data-root)
-  (subpath model-root)
-  (subpath cache-root)
-  (subpath tmp-root)
-  (subpath "/System")
-  (subpath "/Library")
-  (subpath "/usr")
-  (subpath "/opt/homebrew"))
 
 ; Bootstrap profile permits outbound fetches for model and package downloads.
 (allow network-outbound)

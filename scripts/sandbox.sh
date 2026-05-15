@@ -15,8 +15,8 @@ usage() {
 Usage: scripts/sandbox.sh [runtime|bootstrap] -- command [args...]
 
 Examples:
-  scripts/sandbox.sh runtime -- /opt/homebrew/bin/node server.js
-  scripts/sandbox.sh bootstrap -- /Users/Shared/mlx/.venv/bin/python -m mlx_lm.server
+  scripts/sandbox.sh runtime -- /Users/Shared/mlx/.venv/bin/python -m mlx_lm.generate --model mlx-community/Llama-3.2-3B-Instruct-4bit --prompt "Hello"
+  scripts/sandbox.sh bootstrap -- /Users/Shared/mlx/.venv/bin/pip install --upgrade mlx-lm
 
 Environment overrides:
   APP_ROOT
@@ -69,7 +69,8 @@ if [ ! -f "$PROFILE" ]; then
   exit 66
 fi
 
-mkdir -p "$DATA_ROOT" "$MODEL_ROOT" "$CACHE_ROOT" "$TMP_ROOT"
+sudo -u "$SANDBOX_EXEC_USER" mkdir -p "$DATA_ROOT" "$MODEL_ROOT" "$CACHE_ROOT"
+mkdir -p "$TMP_ROOT"
 
 exec sudo -u "$SANDBOX_EXEC_USER" sandbox-exec \
   -f "$PROFILE" \

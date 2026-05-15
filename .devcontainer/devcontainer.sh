@@ -117,10 +117,28 @@ ensure_base_packages() {
 	fi
 
 	apt_install ca-certificates curl git gnupg zsh
+}
 
-	if ! command_exists gh; then
-		apt_install gh
+ensure_gh() {
+	if command_exists gh; then
+		return
 	fi
+
+	detect_os
+	case "$OS_ID" in
+		debian|ubuntu)
+			;;
+		*)
+			log "error: unsupported Linux distribution: $OS_ID"
+			exit 1
+			;;
+	esac
+
+	run_as_root mkdir -p /etc/apt/keyrings
+	curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | run_as_root tee /etc/apt/keyrings/githubcli-archive-keyring.gpg >/dev/null
+	run_as_root chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg
+	printf 'deb [arch=%s signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main\n' "$(dpkg --print-architecture)" | run_as_root tee /etc/apt/sources.list.d/github-cli.list >/dev/null
+	apt_install gh
 }
 
 ensure_tailscale() {
@@ -146,6 +164,7 @@ ensure_tailscale() {
 
 setup_machine() {
 	ensure_base_packages
+	ensure_gh
 	ensure_tailscale
 	write_profile_env
 }
